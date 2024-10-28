@@ -29,7 +29,6 @@ defmodule Apis do
     end)
   end
 
-
   def get_chuck_norris_joke() do
     url = "https://api.chucknorris.io/jokes/random"
     make_request(url, fn(data) -> data["value"] end)
