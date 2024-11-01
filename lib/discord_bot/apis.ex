@@ -45,6 +45,17 @@ defmodule Apis do
     """ end)
   end
 
+  def get_disney(char) when is_binary(char) do
+    url = "https://api.disneyapi.dev/character?name=#{char}"
+    make_request(url, fn(data) ->
+      data["data"] |> Enum.map(fn row -> """
+      Nome: #{row |> Map.get("name")}
+      Foto: #{row |> Map.get("imageUrl")}
+      """
+    end) |> Enum.join("\n")
+    end)
+  end
+
   def get_advice_slip() do
     url = "https://api.adviceslip.com/advice"
     make_request(url, fn(data) -> """
